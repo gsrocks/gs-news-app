@@ -58,9 +58,12 @@ dependencies {
     implementation(Dependencies.Compose.preview)
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.activityCompose)
+    implementation(Dependencies.Compose.iconsExtended)
 
     implementation(Dependencies.Lifecycle.lifecycleKtx)
     implementation(Dependencies.Lifecycle.viewModelCompose)
+
+    implementation(Dependencies.Coil.compose)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)

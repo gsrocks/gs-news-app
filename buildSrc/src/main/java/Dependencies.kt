@@ -12,6 +12,7 @@ object Dependencies {
         const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
         const val material3 = "androidx.compose.material3:material3:1.0.0-alpha09"
         const val activityCompose = "androidx.activity:activity-compose:1.4.0"
+        const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
 
         const val junit = "androidx.compose.ui:ui-test-junit4:$version"
         const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
@@ -21,6 +22,13 @@ object Dependencies {
         private const val version = "2.4.1"
         const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
         const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
+    }
+
+    object Coil {
+        private const val version = "2.0.0-rc02"
+
+        const val coil = "io.coil-kt:coil:$version"
+        const val compose = "io.coil-kt:coil-compose:$version"
     }
 
     object Plugins {
