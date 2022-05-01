@@ -2,9 +2,9 @@ package com.gsrocks.gsnewsapp.feature.news.data.dto
 
 import com.squareup.moshi.Json
 
-data class Source(
+data class SourceDto(
     @field:Json(name = "id")
-    val id: Any,
+    val id: Int,
     @field:Json(name = "name")
     val name: String
 )
