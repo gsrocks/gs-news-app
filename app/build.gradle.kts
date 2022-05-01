@@ -69,7 +69,7 @@ dependencies {
     implementation(Dependencies.Retrofit.retrofit)
     implementation(Dependencies.Retrofit.okHttp)
     implementation(Dependencies.Retrofit.loggingInterceptor)
-    implementation(Dependencies.Retrofit.moshi)
+    implementation(Dependencies.Retrofit.moshiConverter)
     kapt(Dependencies.Retrofit.moshiCodegen)
 
     implementation(Dependencies.Hilt.hiltAndroid)

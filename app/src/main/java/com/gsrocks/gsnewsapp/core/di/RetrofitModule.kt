@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -34,6 +35,7 @@ object RetrofitModule {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(AppConstants.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
 
