@@ -31,6 +31,19 @@ object Dependencies {
         const val compose = "io.coil-kt:coil-compose:$version"
     }
 
+    object Retrofit {
+        private const val retrofitVersion = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+
+        private const val moshiVersion = "1.13.0"
+        const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
+        const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+        private const val okHttpVersion = "4.9.3"
+        const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    }
+
     object Plugins {
         const val androidApplication = "com.android.application"
         const val androidLibrary = "com.android.library"

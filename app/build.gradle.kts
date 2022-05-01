@@ -55,7 +55,7 @@ dependencies {
 
     implementation(Dependencies.Compose.ui)
     implementation(Dependencies.Compose.material)
-    implementation(Dependencies.Compose.preview)
+    debugImplementation(Dependencies.Compose.preview)
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.activityCompose)
     implementation(Dependencies.Compose.iconsExtended)
@@ -64,6 +64,12 @@ dependencies {
     implementation(Dependencies.Lifecycle.viewModelCompose)
 
     implementation(Dependencies.Coil.compose)
+
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.okHttp)
+    implementation(Dependencies.Retrofit.loggingInterceptor)
+    implementation(Dependencies.Retrofit.moshi)
+    kapt(Dependencies.Retrofit.moshiCodegen)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)
