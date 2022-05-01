@@ -2,6 +2,7 @@ plugins {
     id(Dependencies.Plugins.androidApplication)
     id(Dependencies.Plugins.kotlinAndroid)
     id(Dependencies.Plugins.kotlinKapt)
+    id(Dependencies.Plugins.hiltAndroid)
 }
 
 android {
@@ -70,6 +71,10 @@ dependencies {
     implementation(Dependencies.Retrofit.loggingInterceptor)
     implementation(Dependencies.Retrofit.moshi)
     kapt(Dependencies.Retrofit.moshiCodegen)
+
+    implementation(Dependencies.Hilt.hiltAndroid)
+    kapt(Dependencies.Hilt.hiltCompiler)
+    implementation(Dependencies.Hilt.navigationCompose)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)

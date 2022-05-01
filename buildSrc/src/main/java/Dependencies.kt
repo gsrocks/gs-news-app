@@ -44,11 +44,19 @@ object Dependencies {
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     }
 
+    object Hilt {
+        private const val version = "2.41"
+        const val hiltAndroid = "com.google.dagger:hilt-android:$version"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
+        const val navigationCompose = "androidx.hilt:hilt-navigation:1.0.0"
+    }
+
     object Plugins {
         const val androidApplication = "com.android.application"
         const val androidLibrary = "com.android.library"
         const val kotlinAndroid = "org.jetbrains.kotlin.android"
         const val kotlinKapt = "kotlin-kapt"
+        const val hiltAndroid = "dagger.hilt.android.plugin"
     }
 
     object Test {
