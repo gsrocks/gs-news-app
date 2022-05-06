@@ -5,9 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gsrocks.gsnewsapp.core.presentation.Resource
+import com.gsrocks.gsnewsapp.core.utils.empty
 import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
 import com.gsrocks.gsnewsapp.feature.news.domain.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,25 +22,63 @@ class NewsViewModel @Inject constructor(
     private val newsRepository: NewsRepository,
 ) : ViewModel() {
 
-    var breakingNews by mutableStateOf<List<Article>>(emptyList())
+    var breakingNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
+        private set
+
+    var searchedNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
         private set
 
     var currentArticle: Article? = null
         private set
 
+    private val _searchQuery = MutableStateFlow(String.empty)
+    val searchQuery = _searchQuery.asStateFlow()
+
     init {
         getBreakingNews("us", 1)
+
+        viewModelScope.launch {
+            searchQuery
+                .debounce(500)
+                .collectLatest {
+                    if (it.isNotBlank()) {
+                        searchNews(it, 1)
+                    } else {
+                        searchedNews = Resource.Success(emptyList())
+                    }
+                }
+        }
     }
 
-    fun getBreakingNews(countryCode: String, pageNumber: Int) = viewModelScope.launch {
+    private fun getBreakingNews(countryCode: String, pageNumber: Int) = viewModelScope.launch {
+        breakingNews = Resource.Loading()
         val result = newsRepository.getBreakingNews(countryCode, pageNumber)
-        if (result.isSuccess) {
-            breakingNews = result.getOrElse { emptyList() }
+        breakingNews = if (result.isSuccess) {
+            Resource.Success(
+                result.getOrElse { emptyList() }
+            )
+        } else {
+            Resource.Failure(result.exceptionOrNull())
         }
+    }
+
+    private fun searchNews(query: String, pageNumber: Int) = viewModelScope.launch {
+        searchedNews = Resource.Loading()
+        val result = newsRepository.searchNews(query, pageNumber)
+        searchedNews = if (result.isSuccess) {
+            Resource.Success(
+                result.getOrElse { emptyList() }
+            )
+        } else {
+            Resource.Failure(result.exceptionOrNull())
+        }
+    }
+
+    fun onSearchQueryChange(query: String) {
+        _searchQuery.value = query
     }
 
     fun setCurrentArticle(article: Article) {
         currentArticle = article
     }
-
 }

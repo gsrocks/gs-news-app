@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gsrocks.gsnewsapp.core.utils.empty
@@ -26,23 +25,6 @@ import com.gsrocks.gsnewsapp.core.utils.empty
 fun SearchBar(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    placeholder: String? = null,
-    onSearch: (() -> Unit)? = null
-) {
-    SearchBar(
-        value = TextFieldValue(text = value),
-        onValueChange = { onValueChange(it.text) },
-        modifier = modifier,
-        placeholder = placeholder,
-        onSearch = onSearch
-    )
-}
-
-@Composable
-fun SearchBar(
-    value: TextFieldValue,
-    onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     onSearch: (() -> Unit)? = null
@@ -76,7 +58,7 @@ fun SearchBar(
                         modifier = Modifier.padding(end = 8.dp)
                     )
                     Box {
-                        if (value.text.isEmpty() && placeholder != null) {
+                        if (value.isEmpty() && placeholder != null) {
                             Text(
                                 text = placeholder,
                                 color = Color.Gray
