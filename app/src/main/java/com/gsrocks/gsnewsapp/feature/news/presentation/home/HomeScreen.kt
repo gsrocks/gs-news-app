@@ -52,7 +52,7 @@ fun HomeScreen(
         Box(modifier = Modifier.padding(bottom = 80.dp)) {
             when (selectedItem) {
                 0 -> BreakingScreen(viewModel, onNavigate)
-                1 -> SearchScreen()
+                1 -> SearchScreen(viewModel, onNavigate)
                 2 -> FavouriteScreen()
                 else -> BreakingScreen(viewModel, onNavigate)
             }
