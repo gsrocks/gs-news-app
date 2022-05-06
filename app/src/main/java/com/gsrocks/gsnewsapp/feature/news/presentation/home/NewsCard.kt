@@ -19,23 +19,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.gsrocks.gsnewsapp.core.utils.empty
+import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
 import com.gsrocks.gsnewsapp.ui.theme.GsNewsAppTheme
 
 @Composable
-fun NewsCard() {
+fun NewsCard(
+    article: Article,
+    onClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
             .clip(RoundedCornerShape(4))
-            .clickable(onClick = {})
+            .clickable(onClick = onClick)
             .background(color = MaterialTheme.colors.surface)
             .padding(16.dp)
     ) {
         Row {
             Column(verticalArrangement = Arrangement.SpaceBetween) {
                 val imageRequest = ImageRequest.Builder(LocalContext.current)
-                    .data("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png")
+                    .data(article.urlToImage)
                     .build()
                 val painter = rememberAsyncImagePainter(model = imageRequest)
                 Box(
@@ -45,7 +50,7 @@ fun NewsCard() {
                 ) {
                     Image(
                         painter = painter,
-                        contentDescription = "News image",
+                        contentDescription = article.description,
                         modifier = Modifier.clip(
                             RoundedCornerShape(4)
                         )
@@ -53,13 +58,13 @@ fun NewsCard() {
                 }
                 Column {
                     Text(
-                        text = "blabbermouth.net",
+                        text = article.source.name,
                         fontSize = 14.sp,
                         fontStyle = FontStyle.Italic
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = "12:34 04.12.2022",
+                        text = article.publishedAt,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )
@@ -68,12 +73,12 @@ fun NewsCard() {
             Spacer(modifier = Modifier.width(12.dp))
             Column {
                 Text(
-                    text = "COREY TAYLOR Announces October 2022 U.K. Solo Tour",
+                    text = article.title,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = "SLIPKNOT frontman Corey Taylor and his solo band will play on their first U.K. headline shows this fall. The dates kick off at London's legendary Palladium on October 17 and include a special gig on Friday, October 21 at the pre-party of the For The Love Of Horror convention at Manchester's BEC Arena. Direct support ...",
+                    text = article.content ?: String.empty,
                     fontSize = 15.sp,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -82,10 +87,11 @@ fun NewsCard() {
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun NewsCardPreview() {
     GsNewsAppTheme {
         NewsCard()
     }
-}
+}*/

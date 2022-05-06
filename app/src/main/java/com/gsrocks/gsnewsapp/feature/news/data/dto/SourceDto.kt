@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class SourceDto(
     @field:Json(name = "id")
-    val id: Int,
+    val id: String?,
     @field:Json(name = "name")
     val name: String
 )

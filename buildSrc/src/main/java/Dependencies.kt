@@ -48,7 +48,17 @@ object Dependencies {
         private const val version = "2.41"
         const val hiltAndroid = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
-        const val navigationCompose = "androidx.hilt:hilt-navigation:1.0.0"
+        const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+    }
+
+    object Coroutines {
+        private const val version = "1.6.1"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+    }
+
+    object Ui {
+        private const val accompanistVersion = "0.24.7-alpha"
+        const val webView = "com.google.accompanist:accompanist-webview:$accompanistVersion"
     }
 
     object Plugins {

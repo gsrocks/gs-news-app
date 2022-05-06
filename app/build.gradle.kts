@@ -76,6 +76,10 @@ dependencies {
     kapt(Dependencies.Hilt.hiltCompiler)
     implementation(Dependencies.Hilt.navigationCompose)
 
+    implementation(Dependencies.Coroutines.coroutines)
+
+    implementation(Dependencies.Ui.webView)
+
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)
     androidTestImplementation(Dependencies.Test.androidEspresso)

@@ -1,6 +1,6 @@
 package com.gsrocks.gsnewsapp.feature.news.domain.model
 
 data class Source(
-    val id: Int,
+    val id: String?,
     val name: String
 )
