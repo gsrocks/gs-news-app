@@ -17,10 +17,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.gsrocks.gsnewsapp.core.navigation.UiEvent
+import com.gsrocks.gsnewsapp.feature.news.presentation.NewsViewModel
 import com.gsrocks.gsnewsapp.ui.theme.GsNewsAppTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: NewsViewModel,
+    onNavigate: (UiEvent.Navigate) -> Unit
+) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf("Breaking", "Search", "Favourite")
     val icons = listOf(Icons.Default.Feed, Icons.Default.Search, Icons.Filled.Favorite)
@@ -46,19 +51,20 @@ fun HomeScreen() {
     ) { padding ->
         Box(modifier = Modifier.padding(bottom = 80.dp)) {
             when (selectedItem) {
-                0 -> BreakingScreen()
+                0 -> BreakingScreen(viewModel, onNavigate)
                 1 -> SearchScreen()
                 2 -> FavouriteScreen()
-                else -> BreakingScreen()
+                else -> BreakingScreen(viewModel, onNavigate)
             }
         }
     }
 }
 
+/*
 @Preview
 @Composable
 fun HomeScreenPreview() {
     GsNewsAppTheme {
-        HomeScreen()
+        HomeScreen(onNavigate = {})
     }
-}
+}*/

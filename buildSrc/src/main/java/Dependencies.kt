@@ -31,11 +31,42 @@ object Dependencies {
         const val compose = "io.coil-kt:coil-compose:$version"
     }
 
+    object Retrofit {
+        private const val retrofitVersion = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+
+        private const val moshiVersion = "1.13.0"
+        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+        const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+        private const val okHttpVersion = "4.9.3"
+        const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    }
+
+    object Hilt {
+        private const val version = "2.41"
+        const val hiltAndroid = "com.google.dagger:hilt-android:$version"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
+        const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+    }
+
+    object Coroutines {
+        private const val version = "1.6.1"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+    }
+
+    object Ui {
+        private const val accompanistVersion = "0.24.7-alpha"
+        const val webView = "com.google.accompanist:accompanist-webview:$accompanistVersion"
+    }
+
     object Plugins {
         const val androidApplication = "com.android.application"
         const val androidLibrary = "com.android.library"
         const val kotlinAndroid = "org.jetbrains.kotlin.android"
         const val kotlinKapt = "kotlin-kapt"
+        const val hiltAndroid = "dagger.hilt.android.plugin"
     }
 
     object Test {

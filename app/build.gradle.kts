@@ -2,6 +2,7 @@ plugins {
     id(Dependencies.Plugins.androidApplication)
     id(Dependencies.Plugins.kotlinAndroid)
     id(Dependencies.Plugins.kotlinKapt)
+    id(Dependencies.Plugins.hiltAndroid)
 }
 
 android {
@@ -55,7 +56,7 @@ dependencies {
 
     implementation(Dependencies.Compose.ui)
     implementation(Dependencies.Compose.material)
-    implementation(Dependencies.Compose.preview)
+    debugImplementation(Dependencies.Compose.preview)
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.activityCompose)
     implementation(Dependencies.Compose.iconsExtended)
@@ -64,6 +65,20 @@ dependencies {
     implementation(Dependencies.Lifecycle.viewModelCompose)
 
     implementation(Dependencies.Coil.compose)
+
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.okHttp)
+    implementation(Dependencies.Retrofit.loggingInterceptor)
+    implementation(Dependencies.Retrofit.moshiConverter)
+    kapt(Dependencies.Retrofit.moshiCodegen)
+
+    implementation(Dependencies.Hilt.hiltAndroid)
+    kapt(Dependencies.Hilt.hiltCompiler)
+    implementation(Dependencies.Hilt.navigationCompose)
+
+    implementation(Dependencies.Coroutines.coroutines)
+
+    implementation(Dependencies.Ui.webView)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)
