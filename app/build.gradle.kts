@@ -80,6 +80,8 @@ dependencies {
 
     implementation(Dependencies.Ui.webView)
 
+    implementation(Dependencies.Paging.paging)
+
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)
     androidTestImplementation(Dependencies.Test.androidEspresso)

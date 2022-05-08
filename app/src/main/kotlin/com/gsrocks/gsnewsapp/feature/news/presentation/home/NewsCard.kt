@@ -87,11 +87,51 @@ fun NewsCard(
     }
 }
 
-/*
-@Preview(showBackground = true)
 @Composable
-fun NewsCardPreview() {
-    GsNewsAppTheme {
-        NewsCard()
+fun NewsCardPlaceholder() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .clip(RoundedCornerShape(4))
+            .background(color = MaterialTheme.colors.surface)
+            .padding(16.dp)
+    ) {
+        Row {
+            Column(verticalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .height(120.dp)
+                        .width(135.dp)
+                ) {
+                }
+                Column {
+                    Text(
+                        text = "...",
+                        fontSize = 14.sp,
+                        fontStyle = FontStyle.Italic
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = "...",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(
+                    text = "...",
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = "...",
+                    fontSize = 15.sp,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
     }
-}*/
+}
