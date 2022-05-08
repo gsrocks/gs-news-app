@@ -29,13 +29,13 @@ fun BreakingScreen(
             is LoadState.Loading -> CircularProgressIndicator(
                 modifier = Modifier
                     .padding(top = 16.dp)
-                    .align(Alignment.TopCenter)
+                    .align(Alignment.Center)
             )
             is LoadState.Error -> Text(
                 text = stringResource(R.string.failed_to_load_news),
                 modifier = Modifier
                     .padding(top = 16.dp)
-                    .align(Alignment.TopCenter)
+                    .align(Alignment.Center)
             )
             is LoadState.NotLoading -> LazyColumn {
                 items(news) { article ->

@@ -1,7 +1,7 @@
 package com.gsrocks.gsnewsapp.feature.news.data.remote
 
 import com.gsrocks.gsnewsapp.core.AppConstants
-import com.gsrocks.gsnewsapp.feature.news.data.dto.NewsResponseDto
+import com.gsrocks.gsnewsapp.feature.news.data.remote.dto.NewsResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

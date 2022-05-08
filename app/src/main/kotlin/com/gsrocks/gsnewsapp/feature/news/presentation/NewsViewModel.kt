@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val newsRepository: NewsRepository,
+    private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     var searchedNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
