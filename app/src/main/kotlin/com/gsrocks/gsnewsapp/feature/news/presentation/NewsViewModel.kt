@@ -22,9 +22,6 @@ class NewsViewModel @Inject constructor(
     private val newsRepository: NewsRepository,
 ) : ViewModel() {
 
-    var breakingNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
-        private set
-
     var searchedNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
         private set
 
@@ -34,9 +31,9 @@ class NewsViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow(String.empty)
     val searchQuery = _searchQuery.asStateFlow()
 
-    init {
-        getBreakingNews("us", 1)
+    val breakingNewsFlow = newsRepository.getBreakingNewsFlow("us")
 
+    init {
         viewModelScope.launch {
             searchQuery
                 .debounce(500)
@@ -47,18 +44,6 @@ class NewsViewModel @Inject constructor(
                         searchedNews = Resource.Success(emptyList())
                     }
                 }
-        }
-    }
-
-    private fun getBreakingNews(countryCode: String, pageNumber: Int) = viewModelScope.launch {
-        breakingNews = Resource.Loading()
-        val result = newsRepository.getBreakingNews(countryCode, pageNumber)
-        breakingNews = if (result.isSuccess) {
-            Resource.Success(
-                result.getOrElse { emptyList() }
-            )
-        } else {
-            Resource.Failure(result.exceptionOrNull())
         }
     }
 
