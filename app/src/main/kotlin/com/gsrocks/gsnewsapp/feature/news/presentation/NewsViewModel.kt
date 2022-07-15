@@ -34,6 +34,10 @@ class NewsViewModel @Inject constructor(
     val breakingNewsFlow = newsRepository.getBreakingNewsFlow("us")
 
     init {
+        initSearchStream()
+    }
+
+    private fun initSearchStream() {
         viewModelScope.launch {
             searchQuery
                 .debounce(500)
