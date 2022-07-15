@@ -1,11 +1,12 @@
 object Dependencies {
     object Android {
-        const val coreKtx = "androidx.core:core-ktx:1.7.0"
+        const val coreKtx = "androidx.core:core-ktx:1.8.0"
         const val appCompat = "androidx.appcompat:appcompat:1.4.1"
     }
 
     object Compose {
         const val version = "1.1.1"
+        const val compilerVersion = "1.2.0"
 
         const val ui = "androidx.compose.ui:ui:$version"
         const val material = "androidx.compose.material:material:$version"
@@ -45,7 +46,7 @@ object Dependencies {
     }
 
     object Hilt {
-        private const val version = "2.41"
+        private const val version = "2.42"
         const val hiltAndroid = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"

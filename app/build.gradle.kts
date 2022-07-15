@@ -3,14 +3,14 @@ plugins {
     id(Dependencies.Plugins.kotlinAndroid)
     id(Dependencies.Plugins.kotlinKapt)
     id(Dependencies.Plugins.hiltAndroid)
-    id(Dependencies.Plugins.ksp) version "1.6.10-1.0.4"
+    id(Dependencies.Plugins.ksp) version "1.7.0-1.0.6"
 }
 
 android {
     compileSdk = 32
 
     defaultConfig {
-        applicationId = "com.gsrocks.gsnewsapp"
+        applicationId = "com.gsrocks.newsapp"
         minSdk = 21
         targetSdk = 32
         versionCode = 1
@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.version
+        kotlinCompilerExtensionVersion = Dependencies.Compose.compilerVersion
     }
     packagingOptions {
         resources {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GsNewsApp</string>
+    <string name="app_name">newsapp</string>
     <string name="search_news">Search news…</string>
     <string name="nothing_found">Nothing found</string>
     <string name="failed_to_load_news">Failed to load news</string>
