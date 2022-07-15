@@ -42,10 +42,7 @@ fun MainContent() {
                 )
             }
             composable(Routes.ARTICLE) {
-                ArticleScreen(
-                    viewModel = newsViewModel,
-                    onNavigateUp = { navController.popBackStack() }
-                )
+                ArticleScreen(viewModel = newsViewModel)
             }
         }
     }

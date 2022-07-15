@@ -14,14 +14,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.gsrocks.gsnewsapp.core.utils.empty
 import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
-import com.gsrocks.gsnewsapp.ui.theme.GsNewsAppTheme
 
 @Composable
 fun NewsCard(

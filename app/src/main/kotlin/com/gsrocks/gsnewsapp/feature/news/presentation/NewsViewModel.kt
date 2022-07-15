@@ -66,4 +66,14 @@ class NewsViewModel @Inject constructor(
     fun setCurrentArticle(article: Article) {
         currentArticle = article
     }
+
+    fun saveFavouriteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.insertOrUpdateFavouriteArticle(article)
+    }
+
+    fun deleteFavouriteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.deleteFavouriteArticle(article)
+    }
+
+    fun getFavouriteArticles() = newsRepository.getFavouriteArticles()
 }

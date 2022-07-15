@@ -1,6 +1,7 @@
 package com.gsrocks.gsnewsapp.feature.news.presentation.home
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
@@ -11,20 +12,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.gsrocks.gsnewsapp.R
 import com.gsrocks.gsnewsapp.core.navigation.Routes
 import com.gsrocks.gsnewsapp.core.navigation.UiEvent
+import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
 import com.gsrocks.gsnewsapp.feature.news.presentation.NewsViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun BreakingScreen(
-    viewModel: NewsViewModel,
+    pagingFlow: Flow<PagingData<Article>>,
+    onSetCurrentArticle: (Article) -> Unit,
     onNavigate: (UiEvent.Navigate) -> Unit
 ) {
-    Box {
-        val news = viewModel.breakingNewsFlow.collectAsLazyPagingItems()
+    val news = pagingFlow.collectAsLazyPagingItems()
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         when (news.loadState.refresh) {
             is LoadState.Loading -> CircularProgressIndicator(
                 modifier = Modifier
@@ -49,7 +56,7 @@ fun BreakingScreen(
                             NewsCard(
                                 article,
                                 onClick = {
-                                    viewModel.setCurrentArticle(article)
+                                    onSetCurrentArticle(article)
                                     onNavigate(UiEvent.Navigate(Routes.ARTICLE))
                                 }
                             )
