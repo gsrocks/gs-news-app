@@ -93,3 +93,7 @@ dependencies {
     androidTestImplementation(Dependencies.Compose.junit)
     debugImplementation(Dependencies.Compose.uiTooling)
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+}
