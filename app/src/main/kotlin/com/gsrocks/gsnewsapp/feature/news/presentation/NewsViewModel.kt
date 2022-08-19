@@ -10,6 +10,7 @@ import com.gsrocks.gsnewsapp.core.utils.empty
 import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
 import com.gsrocks.gsnewsapp.feature.news.domain.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,9 +18,10 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val newsRepository: NewsRepository,
+    private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     var searchedNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
@@ -66,4 +68,14 @@ class NewsViewModel @Inject constructor(
     fun setCurrentArticle(article: Article) {
         currentArticle = article
     }
+
+    fun saveFavouriteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.insertOrUpdateFavouriteArticle(article)
+    }
+
+    fun deleteFavouriteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.deleteFavouriteArticle(article)
+    }
+
+    fun watchFavouriteArticles() = newsRepository.getFavouriteArticles()
 }

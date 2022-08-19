@@ -1,6 +1,6 @@
-package com.gsrocks.gsnewsapp.core.navigation
+package com.gsrocks.gsnewsapp.navigation
 
-object Routes {
+object Route {
     const val HOME = "home"
     const val ARTICLE = "article"
 }

@@ -1,12 +1,12 @@
-package com.gsrocks.gsnewsapp.feature.news.presentation.home
+package com.gsrocks.gsnewsapp.feature.news.presentation.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -14,59 +14,52 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.gsrocks.gsnewsapp.core.utils.empty
 import com.gsrocks.gsnewsapp.feature.news.domain.model.Article
-import com.gsrocks.gsnewsapp.ui.theme.GsNewsAppTheme
 
 @Composable
 fun NewsCard(
     article: Article,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(200.dp)
+            .background(color = MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
             .clip(RoundedCornerShape(4))
             .clickable(onClick = onClick)
-            .background(color = MaterialTheme.colors.surface)
-            .padding(16.dp)
     ) {
         Row {
-            Column(verticalArrangement = Arrangement.SpaceBetween) {
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.width(135.dp)
+            ) {
                 val imageRequest = ImageRequest.Builder(LocalContext.current)
                     .data(article.urlToImage)
                     .build()
                 val painter = rememberAsyncImagePainter(model = imageRequest)
-                Box(
-                    modifier = Modifier
-                        .height(120.dp)
-                        .width(135.dp)
-                ) {
-                    Image(
-                        painter = painter,
-                        contentDescription = article.description,
-                        modifier = Modifier.clip(
-                            RoundedCornerShape(4)
-                        )
+                Image(
+                    painter = painter,
+                    contentDescription = article.description,
+                    modifier = Modifier.clip(
+                        RoundedCornerShape(4)
                     )
-                }
+                )
                 Column {
                     Text(
                         text = article.source.name,
-                        fontSize = 14.sp,
-                        fontStyle = FontStyle.Italic
+                        style = MaterialTheme.typography.bodySmall
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = article.publishedAt,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        style = MaterialTheme.typography.labelMedium
                     )
                 }
             }
@@ -74,12 +67,12 @@ fun NewsCard(
             Column {
                 Text(
                     text = article.title,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.labelMedium
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = article.content ?: String.empty,
-                    fontSize = 15.sp,
+                    style = MaterialTheme.typography.bodySmall,
                     overflow = TextOverflow.Ellipsis
                 )
             }
@@ -94,7 +87,7 @@ fun NewsCardPlaceholder() {
             .fillMaxWidth()
             .height(200.dp)
             .clip(RoundedCornerShape(4))
-            .background(color = MaterialTheme.colors.surface)
+            .background(color = MaterialTheme.colorScheme.surface)
             .padding(16.dp)
     ) {
         Row {
@@ -103,18 +96,15 @@ fun NewsCardPlaceholder() {
                     modifier = Modifier
                         .height(120.dp)
                         .width(135.dp)
-                ) {
-                }
+                )
                 Column {
                     Text(
                         text = "...",
-                        fontSize = 14.sp,
                         fontStyle = FontStyle.Italic
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = "...",
-                        fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
@@ -128,7 +118,6 @@ fun NewsCardPlaceholder() {
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = "...",
-                    fontSize = 15.sp,
                     overflow = TextOverflow.Ellipsis
                 )
             }

@@ -3,6 +3,7 @@ plugins {
     id(Dependencies.Plugins.kotlinAndroid)
     id(Dependencies.Plugins.kotlinKapt)
     id(Dependencies.Plugins.hiltAndroid)
+    id(Dependencies.Plugins.ksp) version "1.6.10-1.0.4"
 }
 
 android {
@@ -81,6 +82,10 @@ dependencies {
     implementation(Dependencies.Ui.webView)
 
     implementation(Dependencies.Paging.paging)
+
+    implementation(Dependencies.Room.room)
+    ksp(Dependencies.Room.compiler)
+    implementation(Dependencies.Room.ktx)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)

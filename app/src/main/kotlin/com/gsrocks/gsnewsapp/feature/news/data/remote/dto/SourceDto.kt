@@ -1,4 +1,4 @@
-package com.gsrocks.gsnewsapp.feature.news.data.dto
+package com.gsrocks.gsnewsapp.feature.news.data.remote.dto
 
 import com.squareup.moshi.Json
 

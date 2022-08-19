@@ -1,5 +1,7 @@
 package com.gsrocks.gsnewsapp.feature.news.di
 
+import com.gsrocks.gsnewsapp.core.data.local.NewsDatabase
+import com.gsrocks.gsnewsapp.feature.news.data.local.NewsDao
 import com.gsrocks.gsnewsapp.feature.news.data.remote.NewsApi
 import com.gsrocks.gsnewsapp.feature.news.data.repository.NewsRepositoryImpl
 import com.gsrocks.gsnewsapp.feature.news.domain.repository.NewsRepository
@@ -22,7 +24,13 @@ object NewsModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsApi: NewsApi): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
+    fun provideNewsRepository(newsApi: NewsApi, newsDao: NewsDao): NewsRepository {
+        return NewsRepositoryImpl(newsApi, newsDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(db: NewsDatabase): NewsDao {
+        return db.getNewsDao()
     }
 }

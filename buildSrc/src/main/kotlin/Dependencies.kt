@@ -66,12 +66,21 @@ object Dependencies {
         const val paging = "androidx.paging:paging-compose:$version"
     }
 
+    object Room {
+        private const val version = "2.4.2"
+
+        const val room = "androidx.room:room-runtime:$version"
+        const val compiler = "androidx.room:room-compiler:$version"
+        const val ktx = "androidx.room:room-ktx:$version"
+    }
+
     object Plugins {
         const val androidApplication = "com.android.application"
         const val androidLibrary = "com.android.library"
         const val kotlinAndroid = "org.jetbrains.kotlin.android"
         const val kotlinKapt = "kotlin-kapt"
         const val hiltAndroid = "dagger.hilt.android.plugin"
+        const val ksp = "com.google.devtools.ksp"
     }
 
     object Test {

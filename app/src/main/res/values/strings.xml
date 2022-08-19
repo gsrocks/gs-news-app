@@ -3,4 +3,8 @@
     <string name="search_news">Search news…</string>
     <string name="nothing_found">Nothing found</string>
     <string name="failed_to_load_news">Failed to load news</string>
+    <string name="breaking">Breaking</string>
+    <string name="search">Search</string>
+    <string name="favourite">Favourite</string>
+    <string name="save">Save</string>
 </resources>
