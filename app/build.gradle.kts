@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id(Dependencies.Plugins.androidApplication)
     id(Dependencies.Plugins.kotlinAndroid)
@@ -6,11 +9,15 @@ plugins {
     id(Dependencies.Plugins.ksp) version "1.6.10-1.0.4"
 }
 
+val keystoreProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("signing/keystore.properties")))
+}
+
 android {
     compileSdk = 32
 
     defaultConfig {
-        applicationId = "com.gsrocks.gsnewsapp"
+        applicationId = "com.gsrocks.newsapp"
         minSdk = 21
         targetSdk = 32
         versionCode = 1
@@ -22,9 +29,20 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+            storePassword = keystoreProperties.getProperty("storePassword")
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -57,7 +75,8 @@ dependencies {
 
     implementation(Dependencies.Compose.ui)
     implementation(Dependencies.Compose.material)
-    debugImplementation(Dependencies.Compose.preview)
+    implementation(Dependencies.Compose.preview)
+    debugImplementation(Dependencies.Compose.uiTooling)
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.activityCompose)
     implementation(Dependencies.Compose.iconsExtended)
@@ -71,7 +90,7 @@ dependencies {
     implementation(Dependencies.Retrofit.okHttp)
     implementation(Dependencies.Retrofit.loggingInterceptor)
     implementation(Dependencies.Retrofit.moshiConverter)
-    kapt(Dependencies.Retrofit.moshiCodegen)
+    ksp(Dependencies.Retrofit.moshiCodegen)
 
     implementation(Dependencies.Hilt.hiltAndroid)
     kapt(Dependencies.Hilt.hiltCompiler)
@@ -93,7 +112,6 @@ dependencies {
     androidTestImplementation(Dependencies.Test.androidExtJunit)
     androidTestImplementation(Dependencies.Test.androidEspresso)
     androidTestImplementation(Dependencies.Compose.junit)
-    debugImplementation(Dependencies.Compose.uiTooling)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
