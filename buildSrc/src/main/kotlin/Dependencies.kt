@@ -74,6 +74,11 @@ object Dependencies {
         const val ktx = "androidx.room:room-ktx:$version"
     }
 
+    object Billing {
+        val version = "5.0.0"
+        val billing = "com.android.billingclient:billing:$version"
+    }
+
     object Plugins {
         const val androidApplication = "com.android.application"
         const val androidLibrary = "com.android.library"

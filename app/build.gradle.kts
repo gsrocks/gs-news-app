@@ -87,6 +87,8 @@ dependencies {
     ksp(Dependencies.Room.compiler)
     implementation(Dependencies.Room.ktx)
 
+    implementation(Dependencies.Billing.billing)
+
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)
     androidTestImplementation(Dependencies.Test.androidEspresso)
