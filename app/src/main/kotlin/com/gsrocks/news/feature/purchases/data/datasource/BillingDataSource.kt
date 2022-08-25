@@ -160,6 +160,11 @@ class BillingDataSource @Inject constructor(
         }
     }
 
+    suspend fun getActiveSubscriptions(): List<ProductDetailsWithState> {
+        refreshPurchases()
+        return subscriptionDetailsFlow.value.filter { it.productState == ProductState.PURCHASED_AND_ACKNOWLEDGED }
+    }
+
     private suspend fun refreshPurchases() {
         val inAppParams = QueryPurchasesParams.newBuilder()
             .setProductType(BillingClient.ProductType.INAPP)
@@ -175,7 +180,8 @@ class BillingDataSource @Inject constructor(
         }
         val subsPurchasesResult = billingClient.queryPurchasesAsync(subsParams)
         if (subsPurchasesResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-            subsPurchasesResult.purchasesList.forEach {
+            val list = subsPurchasesResult.purchasesList
+            list.forEach {
                 handlePurchase(it, BillingClient.ProductType.SUBS)
             }
         }

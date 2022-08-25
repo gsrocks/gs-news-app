@@ -15,7 +15,7 @@ import com.gsrocks.news.core.presentation.Resource
 import com.gsrocks.news.core.presentation.composables.SearchBar
 import com.gsrocks.news.feature.news.domain.model.Article
 import com.gsrocks.news.feature.news.presentation.NewsViewModel
-import com.gsrocks.news.feature.news.presentation.home.components.NewsCard
+import com.gsrocks.news.feature.news.presentation.home.components.NewsItem
 
 @Composable
 fun SearchNewsTab(
@@ -55,7 +55,7 @@ fun SearchNewsTab(
                         contentPadding = PaddingValues(8.dp)
                     ) {
                         items(news.data) { article ->
-                            NewsCard(
+                            NewsItem(
                                 article = article,
                                 onClick = { onNavigateToArticle(article) },
                                 modifier = Modifier.padding(bottom = 8.dp)

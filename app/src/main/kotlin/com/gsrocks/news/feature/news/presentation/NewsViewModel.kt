@@ -9,6 +9,8 @@ import com.gsrocks.news.core.presentation.Resource
 import com.gsrocks.news.core.utils.empty
 import com.gsrocks.news.feature.news.domain.model.Article
 import com.gsrocks.news.feature.news.domain.repository.NewsRepository
+import com.gsrocks.news.feature.purchases.domain.model.ProductState
+import com.gsrocks.news.feature.purchases.domain.repository.BillingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +23,8 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val newsRepository: NewsRepository
+    private val newsRepository: NewsRepository,
+    private val billingRepository: BillingRepository
 ) : ViewModel() {
 
     var searchedNews by mutableStateOf<Resource<List<Article>>>(Resource.Success(emptyList()))
@@ -35,6 +38,9 @@ class NewsViewModel @Inject constructor(
 
     val breakingNewsFlow = newsRepository.getBreakingNewsFlow("us")
 
+    var isSubscriptionActive by mutableStateOf(false)
+        private set
+
     init {
         viewModelScope.launch {
             searchQuery
@@ -46,6 +52,13 @@ class NewsViewModel @Inject constructor(
                         searchedNews = Resource.Success(emptyList())
                     }
                 }
+        }
+        viewModelScope.launch {
+            billingRepository.subscriptionDetailsFlow.collectLatest { subs ->
+                isSubscriptionActive = subs.any {
+                    it.state == ProductState.PURCHASED_AND_ACKNOWLEDGED
+                }
+            }
         }
     }
 

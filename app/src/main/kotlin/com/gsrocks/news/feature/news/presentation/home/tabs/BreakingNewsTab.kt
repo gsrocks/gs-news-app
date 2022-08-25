@@ -19,7 +19,7 @@ import androidx.paging.compose.items
 import com.gsrocks.news.R
 import com.gsrocks.news.feature.news.domain.model.Article
 import com.gsrocks.news.feature.news.presentation.NewsViewModel
-import com.gsrocks.news.feature.news.presentation.home.components.NewsCard
+import com.gsrocks.news.feature.news.presentation.home.components.NewsItem
 import com.gsrocks.news.feature.news.presentation.home.components.NewsCardPlaceholder
 
 @Composable
@@ -37,7 +37,7 @@ fun BreakingNewsTab(
     ) {
         items(news) { article ->
             if (article != null) {
-                NewsCard(
+                NewsItem(
                     article = article,
                     onClick = { onNavigateToArticle(article) },
                     modifier = Modifier.padding(bottom = 8.dp)

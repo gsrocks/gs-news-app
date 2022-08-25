@@ -21,7 +21,7 @@ import com.gsrocks.news.core.utils.empty
 import com.gsrocks.news.feature.news.domain.model.Article
 
 @Composable
-fun NewsCard(
+fun NewsItem(
     article: Article,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

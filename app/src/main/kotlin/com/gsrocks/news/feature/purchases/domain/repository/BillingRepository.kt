@@ -19,4 +19,6 @@ interface BillingRepository {
     val billingInProcessFlow: Flow<Boolean>
 
     val purchaseErrorFlow: Flow<Throwable>
+
+    suspend fun getActiveSubscriptions(): List<ProductDetailsModel>
 }
