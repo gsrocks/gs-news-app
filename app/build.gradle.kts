@@ -6,27 +6,36 @@ plugins {
     id(Dependencies.Plugins.kotlinAndroid)
     id(Dependencies.Plugins.kotlinKapt)
     id(Dependencies.Plugins.hiltAndroid)
-    id(Dependencies.Plugins.ksp) version "1.6.10-1.0.4"
+    id(Dependencies.Plugins.ksp) version "1.7.10-1.0.6"
 }
 
 val keystoreProperties = Properties().apply {
     load(FileInputStream(rootProject.file("signing/keystore.properties")))
 }
+val localProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.gsrocks.newsapp"
+        applicationId = "com.gsrocks.news"
         minSdk = 21
         targetSdk = 32
-        versionCode = 4
-        versionName = "0.1.2"
+        versionCode = 1
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            "String",
+            "BASE64_ENCODED_PUBLIC_KEY",
+            "\"${localProperties.getProperty("base64EncodedPublicKey")}\""
+        )
     }
 
     signingConfigs {
@@ -39,6 +48,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("release")
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = false
@@ -60,7 +72,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.version
+        kotlinCompilerExtensionVersion = Dependencies.Compose.compilerVersoin
     }
     packagingOptions {
         resources {
@@ -80,6 +92,8 @@ dependencies {
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.activityCompose)
     implementation(Dependencies.Compose.iconsExtended)
+
+    implementation(Dependencies.Ui.viewPager)
 
     implementation(Dependencies.Lifecycle.lifecycleKtx)
     implementation(Dependencies.Lifecycle.viewModelCompose)
@@ -107,6 +121,7 @@ dependencies {
     implementation(Dependencies.Room.ktx)
 
     implementation(Dependencies.Billing.billing)
+    implementation(Dependencies.Billing.ktx)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidExtJunit)

@@ -5,7 +5,8 @@ object Dependencies {
     }
 
     object Compose {
-        const val version = "1.1.1"
+        private const val version = "1.2.0"
+        const val compilerVersoin = "1.3.0"
 
         const val ui = "androidx.compose.ui:ui:$version"
         const val material = "androidx.compose.material:material:$version"
@@ -45,7 +46,7 @@ object Dependencies {
     }
 
     object Hilt {
-        private const val version = "2.41"
+        private const val version = "2.42"
         const val hiltAndroid = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
@@ -57,8 +58,9 @@ object Dependencies {
     }
 
     object Ui {
-        private const val accompanistVersion = "0.24.7-alpha"
+        private const val accompanistVersion = "0.26.1-alpha"
         const val webView = "com.google.accompanist:accompanist-webview:$accompanistVersion"
+        const val viewPager = "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
     }
 
     object Paging {
@@ -75,8 +77,9 @@ object Dependencies {
     }
 
     object Billing {
-        val version = "5.0.0"
-        val billing = "com.android.billingclient:billing:$version"
+        private const val version = "5.0.0"
+        const val billing = "com.android.billingclient:billing:$version"
+        const val ktx = "com.android.billingclient:billing-ktx:$version"
     }
 
     object Plugins {
